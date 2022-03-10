@@ -2884,6 +2884,106 @@ CAMLprim value LFUN(gels_stub_bc)(value *argv, int __unused argn)
 
 /** GGLSE */
 
+extern void FUN(gglse)(
+  integer *M,
+  integer *N,
+  integer *P,
+  NUMBER  *A,
+  integer *LDA,
+  NUMBER  *B,
+  integer *LDB,
+  NUMBER  *C,
+  NUMBER  *D,
+  NUMBER  *X,
+  NUMBER  *WORK,
+  integer *LWORK,
+  integer *INFO);
+
+CAMLprim intnat LFUN(gglse_stub)(
+ intnat vM,
+ intnat vN,
+ intnat vP,
+ intnat vAR,
+ intnat vAC,
+ value  vA,
+ intnat vBR,
+ intnat vBC,
+ value  vB,
+ intnat vCR,
+ intnat vCC,
+ value  vC,
+ intnat vDR,
+ intnat vDC,
+ value  vD,
+ intnat vOFSX,
+ value  vX,
+ value  vWORK,
+ intnat vLWORK
+)
+{
+  CAMLparam5(vA, vB, vC, vD, vX);
+  CAMLxparam1(vWORK);
+
+  integer GET_INT(M),
+          GET_INT(N),
+          GET_INT(P),
+          GET_INT(LWORK),
+          INFO;
+
+  MAT_PARAMS(A);
+  MAT_PARAMS(B);
+  MAT_PARAMS(C);
+  MAT_PARAMS(D);
+
+  VEC_PARAMS(X);
+  VEC_PARAMS1(WORK);
+
+  caml_enter_blocking_section();  /* Allow other threads */
+  FUN(gglse)(
+    &M,
+    &N,
+    &P,
+    A_data,
+    &rows_A,
+    B_data,
+    &rows_B,
+    C_data,
+    D_data,
+    X_data,
+    WORK_data,
+    &LWORK,
+    &INFO);
+  caml_leave_blocking_section();  /* Disallow other threads */
+
+  CAMLreturn(INFO);
+
+}
+
+CAMLprim value LFUN(gglse_stub_bc)(value *argv, int __unused argn)
+{
+  return
+    Val_int(
+        LFUN(gglse_stub)(
+          Int_val(argv[0]),
+          Int_val(argv[1]),
+          Int_val(argv[2]),
+          Int_val(argv[3]),
+          Int_val(argv[4]),
+          argv[5],
+          Int_val(argv[6]),
+          Int_val(argv[7]),
+          argv[8],
+          Int_val(argv[9]),
+          Int_val(argv[10]),
+          argv[11],
+          Int_val(argv[12]),
+          Int_val(argv[13]),
+          argv[14],
+          Int_val(argv[15]),
+          argv[16],
+          argv[17],
+          Int_val(argv[18])));
+}
 
 /* Standard eigenvalue and singular value problems (simple drivers)
 ************************************************************************/

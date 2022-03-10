@@ -1402,3 +1402,45 @@ val gels :
     @param nrhs default = available number of columns in matrix [b]
     @param br default = 1
     @param bc default = 1 *)
+
+val gglse :
+  ?m : int ->
+  ?n : int ->
+  ?p : int ->
+
+  ?ar : int ->
+  ?ac : int ->
+  mat ->
+
+  ?br : int ->
+  ?bc : int ->
+  mat ->
+
+  ?cr : int ->
+  ?cc : int ->
+  mat ->
+
+  ?dr : int ->
+  ?dc : int ->
+  mat ->
+
+  ?incx : int ->
+  vec ->
+
+  ?work : vec ->
+  unit
+(** [gglse ?m ?n ?p ?ar ?ac a ?br ?bc b ?cr ?cc c ?dr ?dc d ?incx x ?work] see
+    LAPACK documentation!
+    @param m default = available number of rows in matrix [a]
+    @param n default = available number of columns of matrix [a]
+    @param p default = available number of rows of matrix [b]
+    @param work default = vec of optimum length (-> {!gglse_opt_lwork})
+    @param ar default = 1
+    @param ac default = 1
+    @param br default = 1
+    @param bc default = 1
+    @param cr default = 1
+    @param cc default = 1
+    @param dr default = 1
+    @param dc default = 1
+ *)

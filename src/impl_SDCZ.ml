@@ -1542,3 +1542,65 @@ let gels ?m ?n ?work ?(trans = `N) ?(ar = 1) ?(ac = 1) a
     direct_gels ~ar ~ac ~a ~m ~n ~trans ~work ~lwork ~nrhs ~br ~bc ~b
   in
   if info <> 0 then gels_err loc ar a m n lwork nrhs br b info
+
+(* GGLSE *)
+
+external direct_gglse :
+  m : (int [@untagged]) ->
+  n : (int [@untagged]) ->
+  p : (int [@untagged]) ->
+
+  ar : (int [@untagged]) ->
+  ac : (int [@untagged]) ->
+  a : mat ->
+
+  br : (int [@untagged]) ->
+  bc : (int [@untagged]) ->
+  b : mat ->
+
+  cr : (int [@untagged]) ->
+  cc : (int [@untagged]) ->
+  c : mat ->
+
+  dr : (int [@untagged]) ->
+  dc : (int [@untagged]) ->
+  d : mat ->
+
+  ofsx : (int [@untagged]) ->
+  x : vec ->
+
+  work : vec ->
+  lwork : (int [@untagged]) ->
+
+  (int [@untagged]) = "lacaml_NPRECgglse_stub_bc" "lacaml_NPRECgglse_stub"
+
+let gglse ?m ?n ?p
+    ?(ar = 1) ?(ac = 1) a
+    ?(br = 1) ?(bc = 1) b
+    ?(cr = 1) ?(cc = 1) c
+    ?(dr = 1) ?(dc = 1) d
+    ?incx x
+    ?work
+  =
+  ignore m;
+  ignore n;
+  ignore p;
+  ignore ar;
+  ignore ac;
+  ignore a;
+  ignore br;
+  ignore bc;
+  ignore b;
+  ignore cr;
+  ignore cc;
+  ignore c;
+  ignore dr;
+  ignore dc;
+  ignore d;
+  ignore incx;
+  ignore x;
+  ignore work;
+  let loc = "Lacaml.NPREC.gglse" in
+  ignore loc;
+  ignore direct_gglse;
+  assert false
